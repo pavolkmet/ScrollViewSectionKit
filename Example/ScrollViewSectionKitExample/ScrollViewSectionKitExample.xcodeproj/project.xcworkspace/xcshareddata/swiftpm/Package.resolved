@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "scrollviewsectionkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pavolkmet/ScrollViewSectionKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3eb95621a3a69864ee1c2d4f868304162135a491"
+      }
+    }
+  ],
+  "version" : 2
+}
