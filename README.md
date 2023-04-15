@@ -2,6 +2,13 @@
 
 A SwiftUI library that allows you to add native (`plain`, `grouped`, `insetGrouped`) or custom section styles within the `ScrollView` SwiftUI component.
 
+<img src="Resources/Preview - 1.png" alt="The preview of the `ScrollViewSectionKit` on iPhones 14 Pro Max. The 1st one shows plain style. The 2nd one shows grouped style. The 3rd one shows inset grouped style. The 4th one shows custom style.">
+
+## Overview
+- 📑 Well documented API.
+- ✅ The API tries to mimic Apple's `List` component but you can use it within the `ScrollView` component.
+- 🎨 You can create custom section style.
+
 ## Requirements
 
 - iOS 14.0+,
@@ -36,6 +43,8 @@ Just drag and drop all files from folder `Source` in the `ScrollViewSectionKit` 
 ## Usage
 
 ```swift
+import ScrollViewSectionKit
+
 struct ContentView: View {
     
     var body: some View {
@@ -60,6 +69,58 @@ struct ContentView: View {
     }
     
 }
+```
+
+See [example application](https://github.com/pavolkmet/ScrollViewSectionKit/tree/main/Example/ScrollViewSectionKitExample) for all examples and advanced usage.
+
+## Configuration
+
+### Section - Style
+
+If you want to use a different style for your section you can simply use ⬇️ function which can be used globally or per section.
+```swift
+func scrollViewSectionStyle(_ style: any ScrollViewSectionStyle) -> some View
+```
+
+Example:
+```
+
+```
+
+### Section - Background Color
+
+If you want to have a different background color of your section you can simply use ⬇️ function which can be used globally or per section.
+```swift
+func scrollViewSectionBackgroundColor(_ color: Color) -> some View
+```
+
+### Row - Background Color
+
+If you want to have a different background color of your row you can simply use ⬇️ function.
+```swift
+func scrollViewRowBackgroundColor(_ color: Color) -> some View
+```
+
+### Row - Insets
+
+If you want to have a different row insets of your row you can simply use ⬇️ function.
+```swift
+func scrollViewRowInsets(_ insets: EdgeInsets?) -> some View
+```
+
+### Row - Separator Insets
+
+If you want to have a different row separator insets of your row you can simply use ⬇️ function.
+```swift
+func scrollViewRowSeparatorInsets(_ insets: EdgeInsets?) -> some View
+```
+
+### Row - Context Menu
+
+If you want to have a context menu for your row you can simply use ⬇️ function.
+
+```swift
+func scrollViewRowContextMenu(@ViewBuilder _ menuItems: @escaping () -> some View) -> some View
 ```
 
 ## 🙌 Shoutouts
