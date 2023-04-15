@@ -21,7 +21,7 @@ struct CustomScrollViewSectionStyle: ScrollViewSectionStyle {
     }
     
     var rowSeparatorInsets: ScrollViewSectionPaddingType {
-        return .edges(.leading, 20.0)
+        return .edges(.horizontal, 20.0)
     }
     
     @ViewBuilder
