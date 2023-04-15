@@ -29,38 +29,60 @@
 
 import SwiftUI
 
+/// The `ScrollViewSectionStyle` protocol defines the appearance and layout of a section in a scroll view.
+/// By conforming to this protocol, you can customize the appearance of your scroll views and make them fit your app's design.
 public protocol ScrollViewSectionStyle {
     
     // MARK: - Associatedtypes - Public
     
+    /// The type of view that will be used for the section's header.
     associatedtype HeaderBody: View
+    /// The type of view that will be used for the section's content.
     associatedtype ContentBody: View
+    ///  The type of view that will be used for the section's footer.
     associatedtype FooterBody: View
     
     // MARK: - Typealiases - Public
     
+    /// A configuration object that contains information about the section's layout and appearance.
     typealias Configuration = ScrollViewSectionStyleConfiguration
     
     // MARK: - Computed Properties - Public
     
+    /// A shape that defines the section's clipping mask.
     var sectionClipShape: AnyShapeBackport { get }
     
+    /// The insets that will be applied to the section's content rows.
     var rowContentInsets: ScrollViewSectionPaddingType { get }
+    
+    
+    /// The insets that will be applied to the section's row separators.
     var rowSeparatorInsets: ScrollViewSectionPaddingType { get }
     
     // MARK: - Helper Methods - Public
     
     @ViewBuilder
+    /// Creates the view for the section header.
+    /// - Parameter configuration: The configuration object used to access data about the section.
+    /// - Returns: The view for the section header.
     func makeHeaderBody(configuration: Self.Configuration) -> Self.HeaderBody
     
     @ViewBuilder
+    /// Creates the view for the section content.
+    /// - Parameter configuration: The configuration object used to access data about the section.
+    /// - Returns: The view for the section content.
     func makeContentBody(configuration: Self.Configuration) -> Self.ContentBody
     
     @ViewBuilder
+    /// Creates the view for the section footer.
+    /// - Parameter configuration: The configuration object used to access data about the section.
+    /// - Returns: The view for the section footer.
     func makeFooterBody(configuration: Self.Configuration) -> Self.FooterBody
     
 }
 
+/// The `ScrollViewSectionStyleConfiguration` struct is used to hold information about the layout and appearance of a section in a scroll view.
+/// By using this struct, you can customize the appearance of your scroll views and make them fit your app's design.
 public struct ScrollViewSectionStyleConfiguration {
     
     // MARK: - Label - Public
@@ -69,10 +91,13 @@ public struct ScrollViewSectionStyleConfiguration {
         
         // MARK: - Properties - Private
         
+        /// The content of the label.
         public var body: AnyView
         
         // MARK: - Initialization - Public
         
+        /// Initializes a new instance of the `Label` struct with the given content.
+        /// - Parameter content: The content of the label.
         init<Content: View>(content: Content) {
             body = AnyView(content)
         }
@@ -81,6 +106,7 @@ public struct ScrollViewSectionStyleConfiguration {
     
     // MARK: - Properties - Public
     
+    /// The label for the section.
     public let label: ScrollViewSectionStyleConfiguration.Label
     
 }

@@ -41,9 +41,14 @@ struct ScrollViewRowContextMenuViewTraitKey: _ViewTraitKey {
 
 public extension View {
     
-    func scrollViewRowContextMenu(@ViewBuilder _ value: @escaping () -> some View) -> some View {
+    /// Sets the context menu for a current row.
+    /// - Parameter menuItems: A closure that returns a view representing the context menu. The `menuItems` parameter is a closure that returns a view representing the context menu. You can use the `ViewBuilder` attribute to create a menu with multiple items.
+    /// - Returns: A `View` object with the row context menu set.
+    ///
+    /// Use this function to add a context menu to a row in a scroll view. The context menu is a popup menu that appears when the user performs a long press or right-click on the row.
+    func scrollViewRowContextMenu(@ViewBuilder _ menuItems: @escaping () -> some View) -> some View {
         _trait(ScrollViewRowContextMenuViewTraitKey.self, {
-            AnyView(value())
+            AnyView(menuItems())
         })
     }
     

@@ -64,8 +64,15 @@ public extension EnvironmentValues {
 
 public extension View {
     
-    func scrollViewSectionBackgroundColor(_ value: Color) -> some View {
-        environment(\.scrollViewSectionBackgroundColor, value)
+    /// Sets the background color for a current section.
+    /// - Parameter color: The color to use for the section background.
+    /// - Returns: A `View` object with the section background color set.
+    ///
+    /// Use this function to customize the appearance of a section in a scroll view by changing its background color.
+    /// 
+    /// - Tag: Function_ScrollViewSectionBackgroundColor
+    func scrollViewSectionBackgroundColor(_ color: Color) -> some View {
+        environment(\.scrollViewSectionBackgroundColor, color)
     }
     
 }

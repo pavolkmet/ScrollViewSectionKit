@@ -29,13 +29,39 @@
 
 import SwiftUI
 
+/// The `ScrollViewSection` is a view that represents a section in a `ScrollView` SwiftUI component.
+///
+/// You can customize the appearance of the section by applying a `ScrollViewSectionStyle` by using function [`.scrollViewSectionBackgroundColor(_ color: Color)`](x-source-tag://Function_ScrollViewSectionBackgroundColor) .
+/// By default, the `insetGrouped` will be used.
+///
+/// - Example:
+///
+///         var body: some View {
+///             ScrollView {
+///                 VStack(spacing: 0.0) {
+///                     ScrollViewSection {
+///                         Text("First row")
+///                         Text("Second row")
+///                         Text("Third row")
+///                     }
+///                 }
+///             }
+///         }
+///
+/// In the example above, `ScrollViewSection` is used to group the three `Text` views together in a section.
+///
+/// The `ScrollViewSection` supports a header and footer view, which can be customized by using the other `init` methods.
+/// If a header or footer view is not needed, use the `EmptyView` type as a placeholder.
+///
 public struct ScrollViewSection<Content, Header, Footer>: View where Content: View, Header: View, Footer: View {
     
     // MARK: - Properties - Public
     
+    /// The background color for the section.
     @Environment(\.scrollViewSectionBackgroundColor)
     public var scrollViewSectionBackgroundColor: Color
     
+    /// The style for the section.
     @Environment(\.scrollViewSectionStyle)
     public var scrollViewSectionStyle: AnyScrollViewSectionStyle
     
@@ -47,6 +73,8 @@ public struct ScrollViewSection<Content, Header, Footer>: View where Content: Vi
     
     // MARK: - Initialization - Public
     
+    /// Initializes a new instance of the `ScrollViewSection` struct with the given content and no header or footer.
+    /// - Parameter content: The content of the section.
     public init(@ViewBuilder content: @escaping () -> Content) where Header == EmptyView, Footer == EmptyView {
         self.content = content
         self.header = {
@@ -57,6 +85,10 @@ public struct ScrollViewSection<Content, Header, Footer>: View where Content: Vi
         }
     }
     
+    /// Initializes a new instance of the `ScrollViewSection` struct with the given content and header, and no footer.
+    /// - Parameters:
+    ///   - content: The content of the section.
+    ///   - header: The header of the section.
     public init(@ViewBuilder content: @escaping () -> Content, @ViewBuilder header: @escaping () -> Header) where Footer == EmptyView {
         self.content = content
         self.header = header
@@ -65,6 +97,10 @@ public struct ScrollViewSection<Content, Header, Footer>: View where Content: Vi
         }
     }
     
+    /// Initializes a new instance of the `ScrollViewSection` struct with the given content and footer, and no header.
+    /// - Parameters:
+    ///   - content: The content of the section.
+    ///   - footer: The footer of the section.
     public init(@ViewBuilder content: @escaping () -> Content, @ViewBuilder footer: @escaping () -> Footer) where Header == EmptyView {
         self.content = content
         self.header = {
@@ -73,6 +109,11 @@ public struct ScrollViewSection<Content, Header, Footer>: View where Content: Vi
         self.footer = footer
     }
     
+    /// Initializes a new instance of the `ScrollViewSection` struct with the given content, header, and footer.
+    /// - Parameters:
+    ///   - content: The content of the section.
+    ///   - header: The header of the section.
+    ///   - footer: The footer of the section.
     public init(@ViewBuilder content: @escaping () -> Content, @ViewBuilder header: @escaping () -> Header, @ViewBuilder footer: @escaping () -> Footer) {
         self.content = content
         self.header = header

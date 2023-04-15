@@ -49,9 +49,14 @@ struct ScrollViewRowBackgroundColorViewTraitKey: _ViewTraitKey {
 // MARK: - Extension - View - Public
 
 public extension View {
-    
-    func scrollViewRowBackgroundColor(_ value: Color) -> some View {
-        _trait(ScrollViewRowBackgroundColorViewTraitKey.self, value)
+
+    /// Sets the background color for a current row.
+    /// - Parameter color: The color to use for the row background.
+    /// - Returns: A `View` object with the row background color set.
+    ///
+    /// Use this function to customize the appearance of a row in a scroll view by changing its background color.
+    func scrollViewRowBackgroundColor(_ color: Color) -> some View {
+        _trait(ScrollViewRowBackgroundColorViewTraitKey.self, color)
     }
     
 }

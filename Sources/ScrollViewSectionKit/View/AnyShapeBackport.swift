@@ -29,14 +29,18 @@
 
 import SwiftUI
 
+/// A type-erased `Shape` that wraps another `Shape` value.
 public struct AnyShapeBackport: Shape {
     
     // MARK: - Properties - Private
     
+    /// The underlying `Shape` instance.
     private var base: (CGRect) -> Path
     
     // MARK: - Initialization - Public
     
+    /// Creates a type-erased `Shape` instance that wraps the provided `Shape`.
+    /// - Parameter shape: The `Shape` to wrap.
     @available(iOS, introduced: 13.0, deprecated: 16.0, message: "Use AnyShape.init(_ shape: Shape) directly.")
     public init<S: Shape>(_ shape: S) {
         base = shape.path(in:)
@@ -44,6 +48,8 @@ public struct AnyShapeBackport: Shape {
     
     // MARK: - Shape
     
+    /// Returns a `Path` representing the shape of the `AnyShapeBackport`.
+    /// - Parameter rect: The bounding rectangle of the shape.
     public func path(in rect: CGRect) -> Path {
         base(rect)
     }

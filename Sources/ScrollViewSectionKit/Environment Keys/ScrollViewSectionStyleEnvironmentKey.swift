@@ -55,9 +55,15 @@ public extension EnvironmentValues {
 // MARK: - Extension - View - Public
 
 public extension View {
-    
-    func scrollViewSectionStyle(_ value: any ScrollViewSectionStyle) -> some View {
-        environment(\.scrollViewSectionStyle, AnyScrollViewSectionStyle(style: value))
+             
+    /// Sets the style for a current section
+    /// - Parameter style: The style to use for the section. The `style` parameter must conform to the `ScrollViewSectionStyle` protocol, which defines the appearance and layout of a section in a scroll view.
+    ///                    You can create custom section styles that conform to this protocol to implement your own section appearance and layout.
+    /// - Returns: A `View` object with the section style set.
+    ///
+    /// Use this function to customize the appearance of a section in a scroll view by changing its style.
+    func scrollViewSectionStyle(_ style: any ScrollViewSectionStyle) -> some View {
+        environment(\.scrollViewSectionStyle, AnyScrollViewSectionStyle(style: style))
     }
     
 }

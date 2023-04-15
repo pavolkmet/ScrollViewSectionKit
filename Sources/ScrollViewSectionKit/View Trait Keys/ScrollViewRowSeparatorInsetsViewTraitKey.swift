@@ -41,8 +41,13 @@ struct ScrollViewRowSeparatorInsetsViewTraitKey: _ViewTraitKey {
 
 public extension View {
     
-    func scrollViewRowSeparatorInsets(_ value: EdgeInsets?) -> some View {
-        _trait(ScrollViewRowSeparatorInsetsViewTraitKey.self, value)
+    /// Sets the edge insets for the separator of a current row.
+    /// - Parameter insets: The edge insets to use for the separator of the row. The `insets` parameter is an optional `EdgeInsets` object that specifies the amount of padding to apply to the separator. If the parameter is `nil`, the default separator edge insets will be used.
+    /// - Returns: A `View` object with the separator edge insets set.
+    ///
+    /// Use this function to adjust the edge insets of the separator for a row in a scroll view. The separator is the line that appears between rows in a scroll view.
+    func scrollViewRowSeparatorInsets(_ insets: EdgeInsets?) -> some View {
+        _trait(ScrollViewRowSeparatorInsetsViewTraitKey.self, insets)
     }
     
 }

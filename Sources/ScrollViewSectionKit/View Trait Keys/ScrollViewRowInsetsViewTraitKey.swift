@@ -41,8 +41,13 @@ struct ScrollViewRowInsetsViewTraitKey: _ViewTraitKey {
 
 public extension View {
     
-    func scrollViewRowInsets(_ value: EdgeInsets?) -> some View {
-        _trait(ScrollViewRowInsetsViewTraitKey.self, value)
+     /// Sets the edge insets for a current row.
+     /// - Parameter insets: The edge insets to use for the row. The `insets` parameter is an optional `EdgeInsets` object that specifies the amount of padding to apply to the row content. If the parameter is `nil`, the default edge insets will be used.
+     /// - Returns: A `View` object with the row edge insets set.
+     ///
+     /// Use this function to adjust the edge insets of a row in a scroll view. The edge insets control the spacing between the row content and the edges of the row.
+    func scrollViewRowInsets(_ insets: EdgeInsets?) -> some View {
+        _trait(ScrollViewRowInsetsViewTraitKey.self, insets)
     }
     
 }
