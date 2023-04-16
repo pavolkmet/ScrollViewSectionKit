@@ -33,13 +33,13 @@ struct ScrollViewRowBackgroundColorViewTraitKey: _ViewTraitKey {
     
     // MARK: - Properties - Public
     
-#if canImport(UIKit)
+#if os(iOS)
     
     static var defaultValue: Color = Color(UIColor.secondarySystemGroupedBackground)
     
 #else
     
-    static var defaultValue: Color = Color.secondary
+    static var defaultValue: Color = Color.white
     
 #endif
     

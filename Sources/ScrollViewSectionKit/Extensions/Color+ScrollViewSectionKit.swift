@@ -33,9 +33,11 @@ import SwiftUI
 
 extension Color {
     
-    @available(iOS, introduced: 13.0, deprecated: 15.0, message: "Use .init(uiColor: UIColor) directly.")
+    @available(iOS, introduced: 14.0, deprecated: 15.0, message: "Use .init(uiColor: UIColor) directly.")
+    @available(watchOS, introduced: 7.0, deprecated: 8.0, message: "Use .init(uiColor: UIColor) directly.")
+    @available(tvOS, introduced: 14.0, deprecated: 15.0, message: "Use .init(uiColor: UIColor) directly.")
     init(_ uiColor: UIKit.UIColor) {
-        if #available(iOS 15.0, *) {
+        if #available(iOS 15.0, watchOS 8.0, tvOS 15.0, *) {
             self.init(uiColor: uiColor)
         } else {
             var red: CGFloat = 0.0

@@ -33,13 +33,13 @@ struct ScrollViewSectionBackgroundColorEnvironmentKey: EnvironmentKey {
     
     // MARK: - Properties - Public
     
-#if canImport(UIKit)
+#if os(iOS)
     
     static var defaultValue: Color = Color(UIColor.systemGroupedBackground)
     
 #else
     
-    static var defaultValue: Color = Color.white
+    static var defaultValue: Color = Color.clear
     
 #endif
     
