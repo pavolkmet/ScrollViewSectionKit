@@ -52,7 +52,6 @@ Pod::Spec.new do |spec|
   spec.author             = { "Pavol Kmet" => "pavolkmet@icloud.com" }
   spec.social_media_url   = "https://twitter.com/PavolKmet"
 
-
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
   #  If this Pod runs only on iOS or OS X, then specify the platform and
@@ -81,7 +80,8 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files = 'Sources/*.{h,m,swift}'
+  spec.swift_versions = ['5']
+  spec.source_files = 'Sources/**/*.swift'
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
