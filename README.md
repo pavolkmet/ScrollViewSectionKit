@@ -11,7 +11,7 @@ A SwiftUI library that allows you to add native (`plain`, `grouped`, `insetGroup
 
 ## Requirements
 
-- iOS 14.0+,
+- iOS 14.0+
 - watchOS 7.0+
 - tvOS 14.0+
 - macOS 11.0+
@@ -77,50 +77,313 @@ See [example application](https://github.com/pavolkmet/ScrollViewSectionKit/tree
 
 ### Section - Style
 
-If you want to use a different style for your section you can simply use ⬇️ function which can be used globally or per section.
+You can customize the appearance of section by applying different styles using the `scrollViewSectionStyle(_ style: any ScrollViewSectionStyle)` modifier. This modifier can be used globally or per section.
+
+In the following example the first `ScrollViewSection` uses the `.grouped` style because it is set as part of the `ScrollView` component but the second `ScrollViewSection` uses `.insetGrouped` style. This is because under the hood the `scrollViewSectionStyle(_ style: any ScrollViewSectionStyle)` modifier is using `EnvironmentKey`. This means that you can use this modifier to set a global style for the entire application. 
+
+<img align="right" src="Resources/Example 1.png" width="320">
+
 ```swift
-func scrollViewSectionStyle(_ style: any ScrollViewSectionStyle) -> some View
-```
+import ScrollViewSectionKit
 
-Example:
-```
-
+struct ContentView: View {
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 0.0) {
+                ScrollViewSection {
+                    Text("This is a 1st row.")
+                    Text("This is a 2nd row.")
+                } header: {
+                    Text("Section header".uppercased())
+                } footer: {
+                    Text("Section footer")
+                }
+                ScrollViewSection {
+                    Text("This is a 1st row.")
+                    Text("This is a 2nd row.")
+                } header: {
+                    Text("Section header".uppercased())
+                } footer: {
+                    Text("Section footer")
+                }
+                .scrollViewSectionStyle(.insetGrouped)
+            }
+        }
+        .scrollViewSectionStyle(.grouped)
+        .scrollViewSectionBackgroundColor(.clear)
+        .background {
+            Color(uiColor: UIColor.systemGroupedBackground)
+                .ignoresSafeArea()
+        }
+    }
+}
 ```
 
 ### Section - Background Color
 
-If you want to have a different background color of your section you can simply use ⬇️ function which can be used globally or per section.
+You can customize the appearance of section by applying different background colors using the `scrollViewSectionBackgroundColor(_ color: Color)` modifier. This modifier can be used globally or per section.
+
+In the following example the first `ScrollViewSection` uses the `.blue.opacity(0.28)` background color because it is set as part of the `ScrollView` component but the second `ScrollViewSection` uses `.orange.opacity(0.28)` background color. This is because under the hood the `scrollViewSectionBackgroundColor(_ color: Color)` modifier is using `EnvironmentKey`. This means that you can use this modifier to set a global style for the entire application. 
+
+<img align="right" src="Resources/Example 2.png" width="320">
+
 ```swift
-func scrollViewSectionBackgroundColor(_ color: Color) -> some View
+import ScrollViewSectionKit
+
+struct ContentView: View {
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 0.0) {
+                ScrollViewSection {
+                    Text("This is a 1st row.")
+                    Text("This is a 2nd row.")
+                } header: {
+                    Text("Section header".uppercased())
+                } footer: {
+                    Text("Section footer")
+                }
+                ScrollViewSection {
+                    Text("This is a 1st row.")
+                    Text("This is a 2nd row.")
+                } header: {
+                    Text("Section header".uppercased())
+                } footer: {
+                    Text("Section footer")
+                }
+                .scrollViewSectionStyle(.insetGrouped)
+                .scrollViewSectionBackgroundColor(.orange.opacity(0.28))
+            }
+        }
+        .scrollViewSectionStyle(.grouped)
+        .scrollViewSectionBackgroundColor(.blue.opacity(0.28))
+        .background {
+            Color(uiColor: UIColor.systemGroupedBackground)
+                .ignoresSafeArea()
+        }
+    }
+}
 ```
 
 ### Row - Background Color
 
-If you want to have a different background color of your row you can simply use ⬇️ function.
+You can customize the appearance of row by applying different background colors using the `scrollViewRowBackgroundColor(_ color: Color)` modifier. This modifier can be used per section or per row.
+
+In the following example the second row of the first section uses the `.blue.opacity(0.28)` background color because it is set as part of row. The first row of the second section, on the other hand, uses `.green.opacity(0.28)` background color because the entire section uses this modifier and the last row of the second section uses the `.orange.opacity(0.28)` background color.
+
+<img align="right" src="Resources/Example 3.png" width="320">
+
 ```swift
-func scrollViewRowBackgroundColor(_ color: Color) -> some View
+import ScrollViewSectionKit
+
+struct ContentView: View {
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 0.0) {
+                ScrollViewSection {
+                    Text("This is a 1st row.")
+                    Text("This is a 2nd row.")
+                        .scrollViewRowBackgroundColor(.blue.opacity(0.28))
+                } header: {
+                    Text("Section header".uppercased())
+                } footer: {
+                    Text("Section footer")
+                }
+                ScrollViewSection {
+                    Text("This is a 1st row.")
+                    Text("This is a 2nd row.")
+                        .scrollViewRowBackgroundColor(.orange.opacity(0.28))
+                } header: {
+                    Text("Section header".uppercased())
+                } footer: {
+                    Text("Section footer")
+                }
+                .scrollViewSectionStyle(.insetGrouped)
+                .scrollViewRowBackgroundColor(.green.opacity(0.28))
+            }
+        }
+        .scrollViewSectionStyle(.grouped)
+        .scrollViewSectionBackgroundColor(.clear)
+        .background {
+            Color(uiColor: UIColor.systemGroupedBackground)
+                .ignoresSafeArea()
+        }
+    }
+}
 ```
 
 ### Row - Insets
 
-If you want to have a different row insets of your row you can simply use ⬇️ function.
+You can also customize the appearance of row by applying different row insets using the `scrollViewRowInsets(_ insets: EdgeInsets?)` modifier. This modifier can be used per section or per row.
+
+In the following example the whole first section uses `EdgeInsets(top: 0.0, leading: 40.0, bottom: 0.0, trailing: 0.0)` row insets because the entire section uses this modifier. The first row of the second section, on the other hand, uses `EdgeInsets(top: 0.0, leading: 40.0, bottom: 0.0, trailing: 0.0)` row insets because just this one row uses this modifier and the last row uses default row insets.
+
+<img align="right" src="Resources/Example 4.png" width="320">
+
 ```swift
-func scrollViewRowInsets(_ insets: EdgeInsets?) -> some View
+import ScrollViewSectionKit
+
+struct ContentView: View {
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 0.0) {
+                ScrollViewSection {
+                    Text("This is a 1st row.")
+                    Text("This is a 2nd row.")
+                } header: {
+                    Text("Section header".uppercased())
+                } footer: {
+                    Text("Section footer")
+                }
+                .scrollViewRowInsets(EdgeInsets(top: 0.0, leading: 40.0, bottom: 0.0, trailing: 0.0))
+                ScrollViewSection {
+                    HStack(spacing: 10.0) {
+                        Image(systemName: "person.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20.0, height: 20.0)
+                        Text("This is a 1st row.")
+                    }
+                    .scrollViewRowInsets(EdgeInsets(top: 0.0, leading: 40.0, bottom: 0.0, trailing: 0.0))
+                    Text("This is a 2nd row.")
+                } header: {
+                    Text("Section header".uppercased())
+                } footer: {
+                    Text("Section footer")
+                }
+                .scrollViewSectionStyle(.insetGrouped)
+            }
+        }
+        .scrollViewSectionStyle(.grouped)
+        .scrollViewSectionBackgroundColor(.clear)
+        .background {
+            Color(uiColor: UIColor.systemGroupedBackground)
+                .ignoresSafeArea()
+        }
+    }
+}
 ```
 
 ### Row - Separator Insets
 
-If you want to have a different row separator insets of your row you can simply use ⬇️ function.
+In the previous example we adjusted the row insets but the separators still use the default insets. We can change this by using `scrollViewRowSeparatorInsets(_ insets: EdgeInsets?)` modifier. This modifier can be used per section or per row.
+
+In the following example the whole first section uses `EdgeInsets(top: 0.0, leading: 40.0, bottom: 0.0, trailing: 0.0)` row separator insets because the entire section uses this modifier. The first row of the second section, on the other hand, uses `EdgeInsets(top: 0.0, leading: 70.0, bottom: 0.0, trailing: 0.0)` row separator insets because just this one row uses this modifier and the last row uses default row insets.
+
+<img align="right" src="Resources/Example 5.png" width="320">
+
 ```swift
-func scrollViewRowSeparatorInsets(_ insets: EdgeInsets?) -> some View
+import ScrollViewSectionKit
+
+struct ContentView: View {
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 0.0) {
+                ScrollViewSection {
+                    Text("This is a 1st row.")
+                    Text("This is a 2nd row.")
+                } header: {
+                    Text("Section header".uppercased())
+                } footer: {
+                    Text("Section footer")
+                }
+                .scrollViewRowInsets(EdgeInsets(top: 0.0, leading: 40.0, bottom: 0.0, trailing: 0.0))
+                .scrollViewRowSeparatorInsets(EdgeInsets(top: 0.0, leading: 40.0, bottom: 0.0, trailing: 0.0))
+                ScrollViewSection {
+                    HStack(spacing: 10.0) {
+                        Image(systemName: "person.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20.0, height: 20.0)
+                        Text("This is a 1st row.")
+                    }
+                    .scrollViewRowInsets(EdgeInsets(top: 0.0, leading: 40.0, bottom: 0.0, trailing: 0.0))
+                    .scrollViewRowSeparatorInsets(EdgeInsets(top: 0.0, leading: 70.0, bottom: 0.0, trailing: 0.0))
+                    Text("This is a 2nd row.")
+                } header: {
+                    Text("Section header".uppercased())
+                } footer: {
+                    Text("Section footer")
+                }
+                .scrollViewSectionStyle(.insetGrouped)
+            }
+        }
+        .scrollViewSectionStyle(.grouped)
+        .scrollViewSectionBackgroundColor(.clear)
+        .background {
+            Color(uiColor: UIColor.systemGroupedBackground)
+                .ignoresSafeArea()
+        }
+    }
+}
 ```
 
 ### Row - Context Menu
 
-If you want to have a context menu for your row you can simply use ⬇️ function.
+You can also add a context menu for the row by applying the `scrollViewRowContextMenu(@ViewBuilder _ menuItems: @escaping () -> some View)` modifier. This modifier can be used per section or per row.
+
+In the following example the second row of the first section uses multiple buttons with the `Divider` component between them.
+
+<img align="right" src="Resources/Example 6.png" width="320">
 
 ```swift
-func scrollViewRowContextMenu(@ViewBuilder _ menuItems: @escaping () -> some View) -> some View
+import ScrollViewSectionKit
+
+struct ContentView: View {
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 0.0) {
+                ScrollViewSection {
+                    Text("This is a 1st row.")
+                    Text("This is a 2nd row.")
+                        .scrollViewRowContextMenu {
+                            Button {
+                                
+                            } label: {
+                                Label("Star", systemImage: "star")
+                            }
+                            Button {
+                                
+                            } label: {
+                                Label("Profile", systemImage: "person")
+                            }
+                            Divider()
+                            Button(role: .destructive) {
+                                
+                            } label: {
+                                Label("Block", systemImage: "hand.raised")
+                            }
+                        }
+                } header: {
+                    Text("Section header".uppercased())
+                } footer: {
+                    Text("Section footer")
+                }
+                ScrollViewSection {
+                    Text("This is a 1st row.")
+                    Text("This is a 2nd row.")
+                } header: {
+                    Text("Section header".uppercased())
+                } footer: {
+                    Text("Section footer")
+                }
+                .scrollViewSectionStyle(.insetGrouped)
+            }
+        }
+        .scrollViewSectionStyle(.grouped)
+        .scrollViewSectionBackgroundColor(.clear)
+        .background {
+            Color(uiColor: UIColor.systemGroupedBackground)
+                .ignoresSafeArea()
+        }
+    }
+    
+}
 ```
 
 ## 🙌 Shoutouts
@@ -130,7 +393,6 @@ func scrollViewRowContextMenu(@ViewBuilder _ menuItems: @escaping () -> some Vie
 
 ## Author
 
-- Email: [pavolkmet@icloud.com](mailto:pavolkmet@icloud.com)
 - Twitter: [@PavolKmet](https://twitter.com/PavolKmet)
 
 ## License
