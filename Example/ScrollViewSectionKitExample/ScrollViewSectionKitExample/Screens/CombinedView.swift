@@ -59,9 +59,9 @@ struct CombinedView: View {
                 }())
                 .scrollViewRowBackgroundColor({
                     if index % 2 != 0 {
-                        return Color.blue.opacity(0.2)
+                        return Color.black.opacity(0.1)
                     } else {
-                        return Color.white
+                        return nil
                     }
                 }())
             }
@@ -103,9 +103,9 @@ struct CombinedView: View {
                 }())
                 .scrollViewRowBackgroundColor({
                     if index % 2 != 0 {
-                        return Color.blue.opacity(0.2)
+                        return Color.black.opacity(0.1)
                     } else {
-                        return Color.white
+                        return nil
                     }
                 }())
             }
@@ -148,9 +148,9 @@ struct CombinedView: View {
                 }())
                 .scrollViewRowBackgroundColor({
                     if index % 2 != 0 {
-                        return Color.blue.opacity(0.2)
+                        return Color.black.opacity(0.1)
                     } else {
-                        return Color.white
+                        return nil
                     }
                 }())
             }
@@ -193,9 +193,9 @@ struct CombinedView: View {
                 }())
                 .scrollViewRowBackgroundColor({
                     if index % 2 != 0 {
-                        return Color.blue.opacity(0.2)
+                        return Color.black.opacity(0.9)
                     } else {
-                        return Color.white
+                        return nil
                     }
                 }())
             }
