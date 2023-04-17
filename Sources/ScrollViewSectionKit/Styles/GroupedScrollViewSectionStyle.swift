@@ -41,6 +41,14 @@ public struct GroupedScrollViewSectionStyle: ScrollViewSectionStyle {
         return .edges(.horizontal, 20.0)
     }
     
+    public var rowBackgroundColor: Color? {
+    #if os(iOS)
+        return Color(UIColor.secondarySystemGroupedBackground)
+    #else
+        return Color.white
+    #endif
+    }
+    
     public var rowSeparatorInsets: ScrollViewSectionPaddingType {
         return .edges(.leading, 20.0)
     }

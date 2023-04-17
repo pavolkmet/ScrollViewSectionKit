@@ -55,6 +55,9 @@ public protocol ScrollViewSectionStyle {
     /// The insets that will be applied to the section's content rows.
     var rowContentInsets: ScrollViewSectionPaddingType { get }
     
+    /// The background color that will be applied to the section's row.
+    var rowBackgroundColor: Color? { get }
+    
     /// The insets that will be applied to the section's row separators.
     var rowSeparatorInsets: ScrollViewSectionPaddingType { get }
     

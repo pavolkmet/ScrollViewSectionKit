@@ -177,6 +177,13 @@ public struct ScrollViewSection<Content, Header, Footer>: View where Content: Vi
     
     @ViewBuilder
     private func row(child: _VariadicView_Children.Element, last: AnyHashable?) -> some View {
+        let backgroundColor: Color? = {
+            if let backgroundColor = child[ScrollViewRowBackgroundColorViewTraitKey.self] {
+                return backgroundColor
+            } else {
+                return scrollViewSectionStyle.rowBackgroundColor
+            }
+        }()
         /// Row
         Group {
             /// Child
@@ -227,7 +234,7 @@ public struct ScrollViewSection<Content, Header, Footer>: View where Content: Vi
                 }
             }
         }
-        .background(child[ScrollViewRowBackgroundColorViewTraitKey.self])
+        .background(backgroundColor)
     }
     
 }

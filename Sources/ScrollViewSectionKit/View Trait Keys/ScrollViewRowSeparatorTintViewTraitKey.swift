@@ -37,7 +37,6 @@ struct ScrollViewRowSeparatorTintViewTraitKey: _ViewTraitKey {
     
 }
 
-
 // MARK: - Extension - View - Public
 
 public extension View {
