@@ -24,11 +24,15 @@ struct CustomScrollViewSectionStyle: ScrollViewSectionStyle {
         return .edges(.horizontal, 20.0)
     }
     
+    var rowSeparatorColor: Color? {
+        return .black
+    }
+    
     @ViewBuilder
     public func makeHeaderBody(configuration: Configuration) -> some View {
         ZStack {
             configuration.label
-                .font(Font.system(size: 13.0, weight: .semibold))
+                .font(Font.footnote)
                 .foregroundColor(Color.white)
                 .multilineTextAlignment(.center)
                 .padding(.vertical, 4.0)
@@ -64,7 +68,7 @@ struct CustomScrollViewSectionStyle: ScrollViewSectionStyle {
     public func makeFooterBody(configuration: Configuration) -> some View {
         ZStack {
             configuration.label
-                .font(Font.system(size: 13.0, weight: .semibold))
+                .font(Font.footnote)
                 .foregroundColor(Color.white)
                 .multilineTextAlignment(.center)
                 .padding(.vertical, 8.0)
