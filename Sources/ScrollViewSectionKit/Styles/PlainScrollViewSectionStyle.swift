@@ -52,7 +52,7 @@ public struct PlainScrollViewSectionStyle: ScrollViewSectionStyle {
     @ViewBuilder
     public func makeHeaderBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(Font.system(size: 13.0, weight: .regular))
+            .font(Font.footnote)
             .foregroundColor(Color.secondary)
             .padding(.top, 10.0)
             .padding(.bottom, 8.0)
@@ -69,7 +69,7 @@ public struct PlainScrollViewSectionStyle: ScrollViewSectionStyle {
     @ViewBuilder
     public func makeFooterBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(Font.system(size: 13.0, weight: .regular))
+            .font(Font.footnote)
             .foregroundColor(Color.secondary)
             .padding(.top, 10.0)
             .padding(.bottom, 0.0)

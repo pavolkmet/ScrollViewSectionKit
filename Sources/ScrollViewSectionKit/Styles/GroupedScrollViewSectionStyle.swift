@@ -53,7 +53,7 @@ public struct GroupedScrollViewSectionStyle: ScrollViewSectionStyle {
     public func makeHeaderBody(configuration: Configuration) -> some View {
         VStack(alignment: .leading, spacing: 0.0) {
             configuration.label
-                .font(Font.system(size: 13.0, weight: .regular))
+                .font(Font.footnote)
                 .foregroundColor(Color.secondary)
                 .padding(.top, 10.0)
                 .padding(.bottom, 8.0)
@@ -74,7 +74,7 @@ public struct GroupedScrollViewSectionStyle: ScrollViewSectionStyle {
         VStack(alignment: .leading, spacing: 0.0) {
             Divider()
             configuration.label
-                .font(Font.system(size: 13.0, weight: .regular))
+                .font(Font.footnote)
                 .foregroundColor(Color.secondary)
                 .padding(.top, 10.0)
                 .padding(.bottom, 0.0)
