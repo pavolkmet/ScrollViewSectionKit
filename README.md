@@ -119,6 +119,7 @@ struct ContentView: View {
                 .ignoresSafeArea()
         }
     }
+    
 }
 ```
 
@@ -169,6 +170,7 @@ struct ContentView: View {
                 .ignoresSafeArea()
         }
     }
+    
 }
 ```
 
@@ -180,7 +182,7 @@ It should look like this ⬇️
 
 ### Row - Background Color
 
-You can customize the appearance of row by applying different background colors using the `scrollViewRowBackgroundColor(_ color: Color)` modifier. This modifier can be used per section or per row.
+You can customize the appearance of row by applying different background colors using the `scrollViewRowBackgroundColor(_ color: Color?)` modifier. This modifier can be used per section or per row.
 
 In the following example the second row of the first section uses the `.blue.opacity(0.28)` background color because it is set as part of row. The first row of the second section, on the other hand, uses `.green.opacity(0.28)` background color because the entire section uses this modifier and the last row of the second section uses the `.orange.opacity(0.28)` background color.
 
@@ -221,6 +223,7 @@ struct ContentView: View {
                 .ignoresSafeArea()
         }
     }
+    
 }
 ```
 
@@ -278,6 +281,7 @@ struct ContentView: View {
                 .ignoresSafeArea()
         }
     }
+    
 }
 ```
 
@@ -337,6 +341,7 @@ struct ContentView: View {
                 .ignoresSafeArea()
         }
     }
+    
 }
 ```
 
@@ -344,6 +349,62 @@ It should look like this ⬇️
 
 <p align="center">
     <img src="Resources/Example 5.png" width="320">
+</p>
+
+### Row - Separator Tint
+
+You can customize the appearance of row's separator by applying different tint colors using the `scrollViewRowSeparatorTint(_ color: Color?)` modifier. This modifier can be used per section or per row.
+
+In the following example the second row's separator of the first section uses the `.blue` tint color because it is set as part of row. The first and third row's separator of the second section, on the other hand, uses `.green` tint color because the entire section uses this modifier and the second row's separator in the same section uses the `.orange` tint color.
+
+
+```swift
+import ScrollViewSectionKit
+
+struct ContentView: View {
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 0.0) {
+                ScrollViewSection {
+                    Text("This is a 1st row.")
+                    Text("This is a 2nd row.")
+                        .scrollViewRowSeparatorTint(.blue)
+                    Text("This is a 3nd row.")
+                } header: {
+                    Text("Section header".uppercased())
+                } footer: {
+                    Text("Section footer")
+                }
+                ScrollViewSection {
+                    Text("This is a 1st row.")
+                    Text("This is a 2nd row.")
+                        .scrollViewRowSeparatorTint(.orange)
+                    Text("This is a 3nd row.")
+                } header: {
+                    Text("Section header".uppercased())
+                } footer: {
+                    Text("Section footer")
+                }
+                .scrollViewSectionStyle(.insetGrouped)
+                .scrollViewRowSeparatorTint(.green)
+            }
+        }
+        .scrollViewSectionStyle(.grouped)
+        .scrollViewSectionBackgroundColor(.clear)
+        .background {
+            Color(uiColor: UIColor.systemGroupedBackground)
+                .ignoresSafeArea()
+        }
+    }
+    
+}
+```
+
+It should look like this ⬇️
+
+<p align="center">
+    <img src="Resources/Example 6.png" width="320">
 </p>
 
 ### Row - Context Menu
@@ -411,7 +472,7 @@ struct ContentView: View {
 It should look like this ⬇️
 
 <p align="center">
-    <img src="Resources/Example 6.png" width="320">
+    <img src="Resources/Example 7.png" width="320">
 </p>
 
 ## 🙌 Shoutouts
