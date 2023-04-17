@@ -200,6 +200,13 @@ public struct ScrollViewSection<Content, Header, Footer>: View where Content: Vi
             /// Divider
             if child.id != last {
                 Group {
+                    let color: Color? = {
+                        if let tint = child[ScrollViewRowSeparatorTintViewTraitKey.self] {
+                            return tint
+                        } else {
+                            return scrollViewSectionStyle.rowSeparatorColor
+                        }
+                    }()
                     let type: ScrollViewSectionPaddingType = {
                         if let insets = child[ScrollViewRowSeparatorInsetsViewTraitKey.self] {
                             return .edgeInsets(insets)
@@ -210,9 +217,11 @@ public struct ScrollViewSection<Content, Header, Footer>: View where Content: Vi
                     switch type {
                     case .edgeInsets(let edgeInsets):
                         Divider()
+                            .overlay(color)
                             .padding(edgeInsets)
                     case .edges(let edges, let length):
                         Divider()
+                            .overlay(color)
                             .padding(edges, length)
                     }
                 }

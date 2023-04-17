@@ -36,6 +36,7 @@ public struct AnyScrollViewSectionStyle: ScrollViewSectionStyle {
     private var _sectionClipShape: AnyShapeBackport
     private var _rowContentInsets: ScrollViewSectionPaddingType
     private var _rowSeparatorInsets: ScrollViewSectionPaddingType
+    private var _rowSeparatorColor: Color?
     private var _makeHeader: (Configuration) -> AnyView
     private var _makeContent: (Configuration) -> AnyView
     private var _makeFooter: (Configuration) -> AnyView
@@ -46,6 +47,7 @@ public struct AnyScrollViewSectionStyle: ScrollViewSectionStyle {
         self._sectionClipShape = style.sectionClipShape
         self._rowContentInsets = style.rowContentInsets
         self._rowSeparatorInsets = style.rowSeparatorInsets
+        self._rowSeparatorColor = style.rowSeparatorColor
         self._makeHeader = { configuration in
             AnyView(style.makeHeaderBody(configuration: configuration))
         }
@@ -69,6 +71,10 @@ public struct AnyScrollViewSectionStyle: ScrollViewSectionStyle {
     
     public var rowSeparatorInsets: ScrollViewSectionPaddingType {
         return _rowSeparatorInsets
+    }
+    
+    public var rowSeparatorColor: Color? {
+        return _rowSeparatorColor
     }
     
     public func makeHeaderBody(configuration: Configuration) -> some View {

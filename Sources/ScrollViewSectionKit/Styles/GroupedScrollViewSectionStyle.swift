@@ -45,6 +45,10 @@ public struct GroupedScrollViewSectionStyle: ScrollViewSectionStyle {
         return .edges(.leading, 20.0)
     }
     
+    public var rowSeparatorColor: Color? {
+        return nil
+    }
+    
     @ViewBuilder
     public func makeHeaderBody(configuration: Configuration) -> some View {
         VStack(alignment: .leading, spacing: 0.0) {
