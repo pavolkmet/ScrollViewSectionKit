@@ -4,6 +4,22 @@ A SwiftUI library that allows you to add native (`plain`, `grouped`, `insetGroup
 
 <img src="Resources/Preview - 1.png" alt="The preview of the `ScrollViewSectionKit` on iPhones 14 Pro Max. The 1st one shows plain style. The 2nd one shows grouped style. The 3rd one shows inset grouped style. The 4th one shows custom style.">
 
+- [Overview](#overview)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+    - [Section - Style](#section---style)
+    - [Section - Background Color](#section---background-color)
+    - [Row - Background Color](#row---background-color)
+    - [Row - Insets](#row---insets)
+    - [Row - Separator Insets](#row---separator-insets)
+    - [Row - Separator Tint](#row---separator-tint)
+    - [Row - Context Menu](#row---context-menu)
+- [Shoutouts](#shoutouts)
+- [Author](#author)
+- [License](#license)
+
 ## Overview
 - 💎 Made with 100% SwiftUI.
 - 🚀 Lightweight, no external dependencies.
@@ -475,7 +491,7 @@ It should look like this ⬇️
     <img src="Resources/Example 7.png" width="320">
 </p>
 
-## 🙌 Shoutouts
+## Shoutouts
 
 - [Moving Parts](https://twitter.com/movingpartsio) for an incredible article on [SwiftUI under the Hood: Variadic Views](https://movingparts.io/variadic-views-in-swiftui) that made all of this possible.
 - [Federico Zanetello](https://twitter.com/zntfdr) once again for an amazing article on [How to create custom SwiftUI view styles](https://www.fivestars.blog/articles/custom-view-styles/) which helped me a lot during the development of this library.
