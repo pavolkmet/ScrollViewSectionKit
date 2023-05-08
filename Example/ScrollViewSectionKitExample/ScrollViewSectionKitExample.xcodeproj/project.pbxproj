@@ -10,7 +10,7 @@
 		BC57F00B29E8BAFB0018CF9D /* ScrollViewSectionKitExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC57F00A29E8BAFB0018CF9D /* ScrollViewSectionKitExampleApp.swift */; };
 		BC57F00F29E8BAFB0018CF9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC57F00E29E8BAFB0018CF9D /* Assets.xcassets */; };
 		BC57F01A29E8BB4D0018CF9D /* ScrollViewSectionKit in Frameworks */ = {isa = PBXBuildFile; productRef = BC57F01929E8BB4D0018CF9D /* ScrollViewSectionKit */; };
-		BC8B91E429E9C2B400ED7EBE /* RoundedCornersShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8B91E329E9C2B400ED7EBE /* RoundedCornersShape.swift */; };
+		BC8B91E429E9C2B400ED7EBE /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8B91E329E9C2B400ED7EBE /* RoundedCorners.swift */; };
 		BC8B91E729E9C2E300ED7EBE /* CustomScrollViewSectionStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8B91E629E9C2E300ED7EBE /* CustomScrollViewSectionStyle.swift */; };
 		BC91186529EAB82200CCF747 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC91186429EAB82200CCF747 /* HomeView.swift */; };
 		BC91186829EABBDD00CCF747 /* DisclosureIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC91186729EABBDD00CCF747 /* DisclosureIndicator.swift */; };
@@ -25,7 +25,7 @@
 		BC57F00729E8BAFB0018CF9D /* ScrollViewSectionKitExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScrollViewSectionKitExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC57F00A29E8BAFB0018CF9D /* ScrollViewSectionKitExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewSectionKitExampleApp.swift; sourceTree = "<group>"; };
 		BC57F00E29E8BAFB0018CF9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BC8B91E329E9C2B400ED7EBE /* RoundedCornersShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornersShape.swift; sourceTree = "<group>"; };
+		BC8B91E329E9C2B400ED7EBE /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
 		BC8B91E629E9C2E300ED7EBE /* CustomScrollViewSectionStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollViewSectionStyle.swift; sourceTree = "<group>"; };
 		BC91186429EAB82200CCF747 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		BC91186729EABBDD00CCF747 /* DisclosureIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclosureIndicator.swift; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 		BC8B91E229E9C2A200ED7EBE /* Shape */ = {
 			isa = PBXGroup;
 			children = (
-				BC8B91E329E9C2B400ED7EBE /* RoundedCornersShape.swift */,
+				BC8B91E329E9C2B400ED7EBE /* RoundedCorners.swift */,
 			);
 			path = Shape;
 			sourceTree = "<group>";
@@ -207,7 +207,7 @@
 			files = (
 				BC91186C29EABD1E00CCF747 /* PlainView.swift in Sources */,
 				BC57F00B29E8BAFB0018CF9D /* ScrollViewSectionKitExampleApp.swift in Sources */,
-				BC8B91E429E9C2B400ED7EBE /* RoundedCornersShape.swift in Sources */,
+				BC8B91E429E9C2B400ED7EBE /* RoundedCorners.swift in Sources */,
 				BC91186829EABBDD00CCF747 /* DisclosureIndicator.swift in Sources */,
 				BC91187629EABD3D00CCF747 /* CombinedView.swift in Sources */,
 				BC91186529EAB82200CCF747 /* HomeView.swift in Sources */,

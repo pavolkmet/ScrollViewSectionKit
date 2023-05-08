@@ -49,13 +49,18 @@ struct CustomScrollViewSectionStyle: ScrollViewSectionStyle {
                 .padding(.top, 10.0)
                 .padding(.bottom, 10.0)
         }
-        .frame(maxWidth: .infinity, minHeight: 20.0, alignment: .center)
+        .frame(maxWidth: .infinity, minHeight: 10.0, alignment: .center)
         .background {
             GeometryReader { proxy in
                 let height = proxy.frame(in: .named("SCROLL_VIEW_HEADER_TITLE")).height
                 Color.black.opacity(0.85)
-                    .clipShape(RoundedCornersShape(cornerRadius: 12.0, corners: [.topLeft, .topRight]))
-                    .padding(.top, height * 0.5)
+                    .clipShape(RoundedCorners(
+                        corners: [
+                            .topLeft(12.0),
+                            .topRight(12.0)
+                        ]
+                    ))
+                    .padding(.top, height > 10.0 ? height * 0.5 : 0.0)
             }
         }
         .coordinateSpace(name: "SCROLL_VIEW_HEADER_TITLE")
@@ -86,13 +91,18 @@ struct CustomScrollViewSectionStyle: ScrollViewSectionStyle {
                 .padding(.top, 10.0)
                 .padding(.bottom, 10.0)
         }
-        .frame(maxWidth: .infinity, minHeight: 20.0, alignment: .center)
+        .frame(maxWidth: .infinity, minHeight: 10.0, alignment: .center)
         .background {
             GeometryReader { proxy in
-                let height = proxy.frame(in: .named("SCROLL_VIEW_FOOTER_TITLE")).height - 10.0
+                let height = proxy.frame(in: .named("SCROLL_VIEW_FOOTER_TITLE")).height
                 Color.black.opacity(0.85)
-                    .clipShape(RoundedCornersShape(cornerRadius: 12.0, corners: [.bottomLeft, .bottomRight]))
-                    .padding(.bottom, height * 0.5)
+                    .clipShape(RoundedCorners(
+                        corners: [
+                            .bottomLeft(12.0),
+                            .bottomRight(12.0)
+                        ]
+                    ))
+                    .padding(.bottom, height > 10.0 ? height * 0.5 : 0.0)
             }
         }
         .coordinateSpace(name: "SCROLL_VIEW_FOOTER_TITLE")
