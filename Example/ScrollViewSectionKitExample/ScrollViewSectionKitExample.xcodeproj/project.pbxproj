@@ -421,7 +421,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pavolkmet/ScrollViewSectionKit";
 			requirement = {
-				branch = main;
+				branch = develop;
 				kind = branch;
 			};
 		};

@@ -33,7 +33,15 @@ struct CustomScrollViewSectionStyle: ScrollViewSectionStyle {
     }
     
     @ViewBuilder
-    public func makeHeaderBody(configuration: Configuration) -> some View {
+    public func makeContentBody(configuration: ContentConfiguration) -> some View {
+        configuration.label
+            .foregroundColor(Color.white)
+            .padding(.vertical, 10.0)
+            .padding(.horizontal, 20.0)
+    }
+    
+    @ViewBuilder
+    public func makeHeaderBody(configuration: HeaderConfiguration) -> some View {
         ZStack {
             configuration.label
                 .font(Font.footnote.weight(.medium))
@@ -67,15 +75,12 @@ struct CustomScrollViewSectionStyle: ScrollViewSectionStyle {
     }
     
     @ViewBuilder
-    public func makeContentBody(configuration: Configuration) -> some View {
+    func makeRowBody(configuration: RowConfiguration) -> some View {
         configuration.label
-            .foregroundColor(Color.white)
-            .padding(.vertical, 10.0)
-            .padding(.horizontal, 20.0)
     }
     
     @ViewBuilder
-    public func makeFooterBody(configuration: Configuration) -> some View {
+    public func makeFooterBody(configuration: FooterConfiguration) -> some View {
         ZStack {
             configuration.label
                 .font(Font.footnote.weight(.medium))

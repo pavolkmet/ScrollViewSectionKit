@@ -58,7 +58,14 @@ public struct InsetGroupedScrollViewSectionStyle: ScrollViewSectionStyle {
     }
     
     @ViewBuilder
-    public func makeHeaderBody(configuration: Configuration) -> some View {
+    public func makeContentBody(configuration: ContentConfiguration) -> some View {
+        configuration.label
+            .padding(.vertical, 10.0)
+            .padding(.horizontal, 20.0)
+    }
+    
+    @ViewBuilder
+    public func makeHeaderBody(configuration: HeaderConfiguration) -> some View {
         configuration.label
             .font(Font.footnote)
             .foregroundColor(Color.secondary)
@@ -68,14 +75,12 @@ public struct InsetGroupedScrollViewSectionStyle: ScrollViewSectionStyle {
     }
     
     @ViewBuilder
-    public func makeContentBody(configuration: Configuration) -> some View {
+    public func makeRowBody(configuration: RowConfiguration) -> some View {
         configuration.label
-            .padding(.vertical, 10.0)
-            .padding(.horizontal, 20.0)
     }
     
     @ViewBuilder
-    public func makeFooterBody(configuration: Configuration) -> some View {
+    public func makeFooterBody(configuration: FooterConfiguration) -> some View {
         configuration.label
             .font(Font.footnote)
             .foregroundColor(Color.secondary)

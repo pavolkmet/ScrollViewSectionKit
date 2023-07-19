@@ -38,9 +38,10 @@ public struct AnyScrollViewSectionStyle: ScrollViewSectionStyle {
     private var _rowSeparatorInsets: ScrollViewSectionPaddingType
     private var _rowBackgroundColor: Color?
     private var _rowSeparatorColor: Color?
-    private var _makeHeader: (Configuration) -> AnyView
-    private var _makeContent: (Configuration) -> AnyView
-    private var _makeFooter: (Configuration) -> AnyView
+    private var _makeContent: (ContentConfiguration) -> AnyView
+    private var _makeHeader: (HeaderConfiguration) -> AnyView
+    private var _makeRow: (RowConfiguration) -> AnyView
+    private var _makeFooter: (FooterConfiguration) -> AnyView
     
     // MARK: - Initialization - Public
     
@@ -50,11 +51,14 @@ public struct AnyScrollViewSectionStyle: ScrollViewSectionStyle {
         self._rowBackgroundColor = style.rowBackgroundColor
         self._rowSeparatorInsets = style.rowSeparatorInsets
         self._rowSeparatorColor = style.rowSeparatorColor
+        self._makeContent = { configuration in
+            AnyView(style.makeContentBody(configuration: configuration))
+        }
         self._makeHeader = { configuration in
             AnyView(style.makeHeaderBody(configuration: configuration))
         }
-        self._makeContent = { configuration in
-            AnyView(style.makeContentBody(configuration: configuration))
+        self._makeRow = { configuration in
+            AnyView(style.makeRowBody(configuration: configuration))
         }
         self._makeFooter = { configuration in
             AnyView(style.makeFooterBody(configuration: configuration))
@@ -83,15 +87,19 @@ public struct AnyScrollViewSectionStyle: ScrollViewSectionStyle {
         return _rowSeparatorColor
     }
     
-    public func makeHeaderBody(configuration: Configuration) -> some View {
-        _makeHeader(configuration)
-    }
-    
-    public func makeContentBody(configuration: Configuration) -> some View {
+    public func makeContentBody(configuration: ContentConfiguration) -> some View {
         _makeContent(configuration)
     }
     
-    public func makeFooterBody(configuration: Configuration) -> some View {
+    public func makeHeaderBody(configuration: HeaderConfiguration) -> some View {
+        _makeHeader(configuration)
+    }
+    
+    public func makeRowBody(configuration: RowConfiguration) -> some View {
+        _makeRow(configuration)
+    }
+    
+    public func makeFooterBody(configuration: FooterConfiguration) -> some View {
         _makeFooter(configuration)
     }
     
