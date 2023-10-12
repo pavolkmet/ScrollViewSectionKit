@@ -73,6 +73,7 @@ struct CustomView: View {
             }
         }
         .scrollViewSectionBackgroundColor(.clear)
+        .scrollViewSectionContainerType(.LazyVStack)
         .background {
             Color(uiColor: UIColor.systemGroupedBackground)
                 .ignoresSafeArea()

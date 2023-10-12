@@ -61,6 +61,10 @@ public struct ScrollViewSection<Content, Header, Footer>: View where Content: Vi
     @Environment(\.scrollViewSectionBackgroundColor)
     public var scrollViewSectionBackgroundColor: Color
     
+    /// The container type for the section.
+    @Environment(\.scrollViewSectionContainerType)
+    public var scrollViewSectionContainerType: ScrollViewSectionContainerType
+    
     /// The style for the section.
     @Environment(\.scrollViewSectionStyle)
     public var scrollViewSectionStyle: AnyScrollViewSectionStyle
@@ -152,18 +156,37 @@ public struct ScrollViewSection<Content, Header, Footer>: View where Content: Vi
                 )
             )
             /// Rows
-            VStack(alignment: .leading, spacing: 0.0) {
-                let last = children.last?.id
-                ForEach(children) { child in
-                    /// Row
-                    if let menuItems = child[ScrollViewRowContextMenuViewTraitKey.self] {
-                        row(child: child, last: last)
-                            .contextMenu(menuItems: menuItems)
-                    } else {
-                        row(child: child, last: last)
+            Group {
+                switch scrollViewSectionContainerType {
+                case .VStack:
+                    VStack(alignment: .leading, spacing: 0.0) {
+                        let last = children.last?.id
+                        ForEach(children) { child in
+                            /// Row
+                            if let menuItems = child[ScrollViewRowContextMenuViewTraitKey.self] {
+                                row(child: child, last: last)
+                                    .contextMenu(menuItems: menuItems)
+                            } else {
+                                row(child: child, last: last)
+                            }
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                case .LazyVStack:
+                    LazyVStack(alignment: .leading, spacing: 0.0) {
+                        let last = children.last?.id
+                        ForEach(children) { child in
+                            /// Row
+                            if let menuItems = child[ScrollViewRowContextMenuViewTraitKey.self] {
+                                row(child: child, last: last)
+                                    .contextMenu(menuItems: menuItems)
+                            } else {
+                                row(child: child, last: last)
+                            }
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
             }
             .clipShape(scrollViewSectionStyle.sectionClipShape)
             /// Footer
