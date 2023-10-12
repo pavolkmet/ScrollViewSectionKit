@@ -11,6 +11,7 @@ A SwiftUI library that allows you to add native (`plain`, `grouped`, `insetGroup
 - [Configuration](#configuration)
     - [Section - Style](#section---style)
     - [Section - Background Color](#section---background-color)
+    - [Section - Container Type](#section---container-type)
     - [Row - Background Color](#row---background-color)
     - [Row - Insets](#row---insets)
     - [Row - Separator Insets](#row---separator-insets)
@@ -195,6 +196,54 @@ It should look like this ⬇️
 <p align="center">
     <img src="Resources/Example 2.png" width="320">
 </p>
+
+### Section - Container Type
+
+You can customize the performance of section by changing its container type using the `scrollViewSectionContainerType(_ type: ScrollViewSectionContainerType)` modifier. This modifier can be used globally or per section.
+
+In the following example the first `ScrollViewSection` uses the `.VStack` container type because it is set as part of the `ScrollView` component but the second `ScrollViewSection` uses `.LazyVStack` container type. This is because under the hood the `scrollViewSectionContainerType(_ type: ScrollViewSectionContainerType)` modifier is using `EnvironmentKey`. This means that you can use this modifier to set a global style for the entire application. 
+
+```swift
+import ScrollViewSectionKit
+
+struct ContentView: View {
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 0.0) {
+                ScrollViewSection {
+                    Text("This is a 1st row.")
+                    Text("This is a 2nd row.")
+                } header: {
+                    Text("Section header".uppercased())
+                } footer: {
+                    Text("Section footer")
+                }
+                ScrollViewSection {
+                    Text("This is a 1st row.")
+                    Text("This is a 2nd row.")
+                } header: {
+                    Text("Section header".uppercased())
+                } footer: {
+                    Text("Section footer")
+                }
+                .scrollViewSectionStyle(.insetGrouped)
+                .scrollViewSectionBackgroundColor(.orange.opacity(0.28))
+                .scrollViewSectionContainerType(.LazyVStack)
+            }
+        }
+        .scrollViewSectionStyle(.grouped)
+        .scrollViewSectionBackgroundColor(.blue.opacity(0.28))
+        .scrollViewSectionContainerType(.VStack)
+        .background {
+            Color(uiColor: UIColor.systemGroupedBackground)
+                .ignoresSafeArea()
+        }
+    }
+    
+}
+```
+
 
 ### Row - Background Color
 
