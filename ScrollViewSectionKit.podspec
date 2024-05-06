@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "ScrollViewSectionKit"
-  spec.version      = "1.2.0"
+  spec.version      = "1.3.0"
   spec.summary      = "A SwiftUI library that allows you to add native or custom section styles within the `ScrollView` SwiftUI component."
 
   # This description is used to generate tags and improve search results.
@@ -91,6 +91,9 @@ Pod::Spec.new do |spec|
   #  non-essential files like tests, examples and documentation.
   #
 
+  spec.resource_bundles = {
+    'ScrollViewSectionKit' => ['Sources/**/PrivacyInfo.xcprivacy']
+  }
   spec.resources = "Resources/*.png"
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
