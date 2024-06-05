@@ -30,28 +30,44 @@
 import SwiftUI
 
 /// A type-erased `Shape` that wraps another `Shape` value.
-public struct AnyShapeBackport: Shape {
+public struct AnyShapeBackport: InsettableShape, @unchecked Sendable {
     
     // MARK: - Properties - Private
     
     /// The underlying `Shape` instance.
     private var base: (CGRect) -> Path
     
+    /// The amount by which to inset the shape.
+    private var inset: CGFloat
+    
     // MARK: - Initialization - Public
     
     /// Creates a type-erased `Shape` instance that wraps the provided `Shape`.
     /// - Parameter shape: The `Shape` to wrap.
+    /// - Note: This initializer is deprecated in iOS 16.0. Use `AnyShape.init(_ shape: Shape)` directly instead.
     @available(iOS, introduced: 13.0, deprecated: 16.0, message: "Use AnyShape.init(_ shape: Shape) directly.")
     public init<S: Shape>(_ shape: S) {
-        base = shape.path(in:)
+        self.base = shape.path(in:)
+        self.inset = 0.0
     }
     
     // MARK: - Shape
     
     /// Returns a `Path` representing the shape of the `AnyShapeBackport`.
     /// - Parameter rect: The bounding rectangle of the shape.
+    /// - Returns: A `Path` that represents the shape within the specified rectangle.
     public func path(in rect: CGRect) -> Path {
-        base(rect)
+        base(rect.insetBy(dx: inset, dy: inset))
     }
     
+    // MARK: - InsettableShape
+    
+    /// Returns an inset version of the `AnyShapeBackport`.
+    /// - Parameter amount: The amount by which to inset the shape.
+    /// - Returns: An `AnyShapeBackport` that is inset by the specified amount.
+    public func inset(by amount: CGFloat) -> some InsettableShape {
+        var shape = self
+        shape.inset += amount
+        return shape
+    }
 }
