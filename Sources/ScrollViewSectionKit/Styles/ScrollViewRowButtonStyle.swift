@@ -41,14 +41,16 @@ public struct ScrollViewRowButtonStyle: ButtonStyle {
     
     // MARK: - Properties - Private
     
-    private let padding: Double
+    private let horizontalPadding: Double
+    private let verticalPadding: Double
     private let color: Color
     private let opacity: Double
     
     // MARK: - Initialization - Public
     
-    public init(padding: Double = 20.0, color: Color = .black, opacity: Double = 0.1) {
-        self.padding = padding
+    public init(horizontalPadding: Double = 20.0, verticalPadding: Double = 20.0, color: Color = .black, opacity: Double = 0.1) {
+        self.horizontalPadding = horizontalPadding
+        self.verticalPadding = verticalPadding
         self.color = color
         self.opacity = opacity
     }
@@ -59,12 +61,14 @@ public struct ScrollViewRowButtonStyle: ButtonStyle {
         ZStack {
             configuration.label
                 .opacity(isEnabled ? 1.0 : 0.45)
-                .padding(.horizontal, padding)
+                .padding(.horizontal, horizontalPadding)
+                .padding(.vertical, verticalPadding)
             Rectangle()
                 .fill(color.opacity(configuration.isPressed ? opacity : 0.0))
         }
         .contentShape(Rectangle())
-        .padding(.horizontal, -padding)
+        .padding(.horizontal, -horizontalPadding)
+        .padding(.vertical, -verticalPadding)
         .animation(configuration.isPressed ? .none : .default, value: configuration.isPressed)
         .allowsHitTesting(redactionReasons != .placeholder)
     }
@@ -79,8 +83,8 @@ public extension ButtonStyle where Self == ScrollViewRowButtonStyle {
         return ScrollViewRowButtonStyle()
     }
     
-    static func scrollViewRow(padding: Double = 20.0, color: Color = .black, opacity: Double = 0.1) -> ScrollViewRowButtonStyle {
-        return ScrollViewRowButtonStyle(padding: padding, color: color, opacity: opacity)
+    static func scrollViewRow(horizontalPadding: Double = 20.0, verticalPadding: Double = 20.0, color: Color = .black, opacity: Double = 0.1) -> ScrollViewRowButtonStyle {
+        return ScrollViewRowButtonStyle(horizontalPadding: horizontalPadding, verticalPadding: verticalPadding, color: color, opacity: opacity)
     }
     
 }
