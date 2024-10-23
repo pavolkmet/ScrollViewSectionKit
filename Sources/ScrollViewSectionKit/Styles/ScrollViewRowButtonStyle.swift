@@ -41,13 +41,17 @@ public struct ScrollViewRowButtonStyle: ButtonStyle {
     
     // MARK: - Properties - Private
     
-    private let padding: Double
+    private let padding: EdgeInsets
     private let color: Color
     private let opacity: Double
     
     // MARK: - Initialization - Public
     
-    public init(padding: Double = 20.0, color: Color = .black, opacity: Double = 0.1) {
+    public init(
+        padding: EdgeInsets = EdgeInsets(top: 0.0, leading: 20.0, bottom: 0.0, trailing: 20.0),
+        color: Color = .black,
+        opacity: Double = 0.1
+    ) {
         self.padding = padding
         self.color = color
         self.opacity = opacity
@@ -59,12 +63,19 @@ public struct ScrollViewRowButtonStyle: ButtonStyle {
         ZStack {
             configuration.label
                 .opacity(isEnabled ? 1.0 : 0.45)
-                .padding(.horizontal, padding)
+                .padding(padding)
             Rectangle()
                 .fill(color.opacity(configuration.isPressed ? opacity : 0.0))
         }
         .contentShape(Rectangle())
-        .padding(.horizontal, -padding)
+        .padding(
+            EdgeInsets(
+                top: -padding.top,
+                leading: -padding.leading,
+                bottom: -padding.bottom,
+                trailing: -padding.trailing
+            )
+        )
         .animation(configuration.isPressed ? .none : .default, value: configuration.isPressed)
         .allowsHitTesting(redactionReasons != .placeholder)
     }
@@ -79,7 +90,11 @@ public extension ButtonStyle where Self == ScrollViewRowButtonStyle {
         return ScrollViewRowButtonStyle()
     }
     
-    static func scrollViewRow(padding: Double = 20.0, color: Color = .black, opacity: Double = 0.1) -> ScrollViewRowButtonStyle {
+    static func scrollViewRow(
+        padding: EdgeInsets = EdgeInsets(top: 0.0, leading: 20.0, bottom: 0.0, trailing: 20.0),
+        color: Color = .black,
+        opacity: Double = 0.1
+    ) -> ScrollViewRowButtonStyle {
         return ScrollViewRowButtonStyle(padding: padding, color: color, opacity: opacity)
     }
     
