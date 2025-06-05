@@ -1,4 +1,5 @@
 {
+  "originHash" : "7ec3e8b733e8c1bff9d58c43188e73adfaeb40b46d9336c3e1908e5f519daa75",
   "pins" : [
     {
       "identity" : "scrollviewsectionkit",
@@ -6,9 +7,9 @@
       "location" : "https://github.com/pavolkmet/ScrollViewSectionKit",
       "state" : {
         "branch" : "main",
-        "revision" : "49a509ebf408aff2a3712f63423260b9465eb56e"
+        "revision" : "68da8e34a1694ae5f5c97883e8fa5150dc1fe375"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

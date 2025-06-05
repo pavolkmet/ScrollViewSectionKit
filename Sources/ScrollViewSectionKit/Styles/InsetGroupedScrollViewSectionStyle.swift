@@ -33,10 +33,6 @@ public struct InsetGroupedScrollViewSectionStyle: ScrollViewSectionStyle {
     
     // MARK: - IScrollViewSectionStyle
     
-    public var sectionClipShape: AnyShapeBackport {
-        return AnyShapeBackport(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
-    }
-    
     public var rowContentInsets: ScrollViewSectionPaddingType {
         return .edges(.horizontal, 20.0)
     }
@@ -58,7 +54,14 @@ public struct InsetGroupedScrollViewSectionStyle: ScrollViewSectionStyle {
     }
     
     @ViewBuilder
-    public func makeHeaderBody(configuration: Configuration) -> some View {
+    public func makeContentBody(configuration: ContentConfiguration) -> some View {
+        configuration.label
+            .padding(.vertical, 10.0)
+            .padding(.horizontal, 20.0)
+    }
+    
+    @ViewBuilder
+    public func makeHeaderBody(configuration: HeaderConfiguration) -> some View {
         configuration.label
             .font(Font.footnote)
             .foregroundColor(Color.secondary)
@@ -68,14 +71,18 @@ public struct InsetGroupedScrollViewSectionStyle: ScrollViewSectionStyle {
     }
     
     @ViewBuilder
-    public func makeContentBody(configuration: Configuration) -> some View {
+    public func makeRowsBody(configuration: RowsConfiguration) -> some View {
         configuration.label
-            .padding(.vertical, 10.0)
-            .padding(.horizontal, 20.0)
+            .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
     }
     
     @ViewBuilder
-    public func makeFooterBody(configuration: Configuration) -> some View {
+    public func makeRowBody(configuration: RowConfiguration) -> some View {
+        configuration.label
+    }
+    
+    @ViewBuilder
+    public func makeFooterBody(configuration: FooterConfiguration) -> some View {
         configuration.label
             .font(Font.footnote)
             .foregroundColor(Color.secondary)

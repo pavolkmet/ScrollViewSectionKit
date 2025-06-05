@@ -156,39 +156,47 @@ public struct ScrollViewSection<Content, Header, Footer>: View where Content: Vi
                 )
             )
             /// Rows
-            Group {
-                switch scrollViewSectionContainerType {
-                case .VStack:
-                    VStack(alignment: .leading, spacing: 0.0) {
-                        let last = children.last?.id
-                        ForEach(children) { child in
-                            /// Row
-                            if let menuItems = child[ScrollViewRowContextMenuViewTraitKey.self] {
-                                row(child: child, last: last)
-                                    .contextMenu(menuItems: menuItems)
-                            } else {
-                                row(child: child, last: last)
+            let rows = {
+                Group {
+                    switch scrollViewSectionContainerType {
+                    case .VStack:
+                        VStack(alignment: .leading, spacing: 0.0) {
+                            let first = children.first?.id
+                            let last = children.last?.id
+                            ForEach(children) { child in
+                                /// Row
+                                if let menuItems = child[ScrollViewRowContextMenuViewTraitKey.self] {
+                                    row(child: child, first: first, last: last)
+                                        .contextMenu(menuItems: menuItems)
+                                } else {
+                                    row(child: child, first: first, last: last)
+                                }
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                case .LazyVStack:
-                    LazyVStack(alignment: .leading, spacing: 0.0) {
-                        let last = children.last?.id
-                        ForEach(children) { child in
-                            /// Row
-                            if let menuItems = child[ScrollViewRowContextMenuViewTraitKey.self] {
-                                row(child: child, last: last)
-                                    .contextMenu(menuItems: menuItems)
-                            } else {
-                                row(child: child, last: last)
+                    case .LazyVStack:
+                        LazyVStack(alignment: .leading, spacing: 0.0) {
+                            let first = children.first?.id
+                            let last = children.last?.id
+                            ForEach(children) { child in
+                                /// Row
+                                if let menuItems = child[ScrollViewRowContextMenuViewTraitKey.self] {
+                                    row(child: child, first: first, last: last)
+                                        .contextMenu(menuItems: menuItems)
+                                } else {
+                                    row(child: child, first: first, last: last)
+                                }
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
             }
-            .clipShape(scrollViewSectionStyle.sectionClipShape)
+            scrollViewSectionStyle.makeRowsBody(
+                configuration: .init(
+                    label: .init(content: rows())
+                )
+            )
             /// Footer
             scrollViewSectionStyle.makeFooterBody(
                 configuration: .init(
@@ -199,7 +207,7 @@ public struct ScrollViewSection<Content, Header, Footer>: View where Content: Vi
     }
     
     @ViewBuilder
-    private func row(child: _VariadicView_Children.Element, last: AnyHashable?) -> some View {
+    private func row(child: _VariadicView_Children.Element, first: AnyHashable?, last: AnyHashable?) -> some View {
         let backgroundColor: Color? = {
             if let backgroundColor = child[ScrollViewRowBackgroundColorViewTraitKey.self] {
                 return backgroundColor
@@ -220,11 +228,23 @@ public struct ScrollViewSection<Content, Header, Footer>: View where Content: Vi
                 }()
                 switch type {
                 case .edgeInsets(let edgeInsets):
-                    child
-                        .padding(edgeInsets)
+                    scrollViewSectionStyle.makeRowBody(
+                        configuration: .init(
+                            label: .init(content: child),
+                            isFirst: child.id == first,
+                            isLast: child.id == last
+                        )
+                    )
+                    .padding(edgeInsets)
                 case .edges(let edges, let length):
-                    child
-                        .padding(edges, length)
+                    scrollViewSectionStyle.makeRowBody(
+                        configuration: .init(
+                            label: .init(content: child),
+                            isFirst: child.id == first,
+                            isLast: child.id == last
+                        )
+                    )
+                    .padding(edges, length)
                 }
             }
             /// Divider
