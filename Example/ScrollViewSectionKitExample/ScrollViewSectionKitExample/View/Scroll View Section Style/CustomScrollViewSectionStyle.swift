@@ -12,10 +12,6 @@ struct CustomScrollViewSectionStyle: ScrollViewSectionStyle {
     
     // MARK: - IScrollViewSectionStyle
     
-    var sectionClipShape: AnyShapeBackport {
-        return AnyShapeBackport(Rectangle())
-    }
-    
     var rowContentInsets: ScrollViewSectionPaddingType {
         return .edges(.horizontal, 20.0)
     }
@@ -72,6 +68,12 @@ struct CustomScrollViewSectionStyle: ScrollViewSectionStyle {
             }
         }
         .coordinateSpace(name: "SCROLL_VIEW_HEADER_TITLE")
+    }
+    
+    @ViewBuilder
+    func makeRowsBody(configuration: RowsConfiguration) -> some View {
+        configuration.label
+            .clipShape(Rectangle())
     }
     
     @ViewBuilder

@@ -39,6 +39,8 @@ public protocol ScrollViewSectionStyle {
     associatedtype ContentBody: View
     /// The type of view that will be used for the section's header.
     associatedtype HeaderBody: View
+    /// The type of view that will be used for the section's rows.
+    associatedtype RowsBody: View
     /// The type of view that will be used for the section's row.
     associatedtype RowBody: View
     ///  The type of view that will be used for the section's footer.
@@ -50,15 +52,14 @@ public protocol ScrollViewSectionStyle {
     typealias ContentConfiguration = ScrollViewSectionStyleContentConfiguration
     /// A configuration object that contains information about the section's header and appearance.
     typealias HeaderConfiguration = ScrollViewSectionStyleHeaderConfiguration
+    /// A configuration object that contains information about the section's rows and appearance.
+    typealias RowsConfiguration = ScrollViewSectionStyleRowsConfiguration
     /// A configuration object that contains information about the section's row and appearance.
     typealias RowConfiguration = ScrollViewSectionStyleRowConfiguration
     /// A configuration object that contains information about the section's footer and appearance.
     typealias FooterConfiguration = ScrollViewSectionStyleFooterConfiguration
     
     // MARK: - Computed Properties - Public
-    
-    /// A shape that defines the section's clipping mask.
-    var sectionClipShape: AnyShapeBackport { get }
     
     /// The insets that will be applied to the section's content rows.
     var rowContentInsets: ScrollViewSectionPaddingType { get }
@@ -87,9 +88,15 @@ public protocol ScrollViewSectionStyle {
     func makeHeaderBody(configuration: Self.HeaderConfiguration) -> Self.HeaderBody
     
     @ViewBuilder
+    /// Creates the view for the section rows.
+    /// - Parameter configuration: The configuration object used to access data about the section.
+    /// - Returns: The view for the section rows.
+    func makeRowsBody(configuration: Self.RowsConfiguration) -> Self.RowsBody
+    
+    @ViewBuilder
     /// Creates the view for the section row.
     /// - Parameter configuration: The configuration object used to access data about the section.
-    /// - Returns: The view for the section header.
+    /// - Returns: The view for the section row.
     func makeRowBody(configuration: Self.RowConfiguration) -> Self.RowBody
     
     @ViewBuilder

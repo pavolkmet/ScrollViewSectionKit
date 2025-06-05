@@ -33,20 +33,19 @@ public struct AnyScrollViewSectionStyle: ScrollViewSectionStyle {
     
     // MARK: - Properties - Private
     
-    private var _sectionClipShape: AnyShapeBackport
     private var _rowContentInsets: ScrollViewSectionPaddingType
     private var _rowSeparatorInsets: ScrollViewSectionPaddingType
     private var _rowBackgroundColor: Color?
     private var _rowSeparatorColor: Color?
     private var _makeContent: (ContentConfiguration) -> AnyView
     private var _makeHeader: (HeaderConfiguration) -> AnyView
+    private var _makeRows: (RowsConfiguration) -> AnyView
     private var _makeRow: (RowConfiguration) -> AnyView
     private var _makeFooter: (FooterConfiguration) -> AnyView
     
     // MARK: - Initialization - Public
     
     init(style: any ScrollViewSectionStyle) {
-        self._sectionClipShape = style.sectionClipShape
         self._rowContentInsets = style.rowContentInsets
         self._rowBackgroundColor = style.rowBackgroundColor
         self._rowSeparatorInsets = style.rowSeparatorInsets
@@ -57,6 +56,9 @@ public struct AnyScrollViewSectionStyle: ScrollViewSectionStyle {
         self._makeHeader = { configuration in
             AnyView(style.makeHeaderBody(configuration: configuration))
         }
+        self._makeRows = { configuration in
+            AnyView(style.makeRowsBody(configuration: configuration))
+        }
         self._makeRow = { configuration in
             AnyView(style.makeRowBody(configuration: configuration))
         }
@@ -66,10 +68,6 @@ public struct AnyScrollViewSectionStyle: ScrollViewSectionStyle {
     }
     
     // MARK: - IScrollViewSectionStyle
-    
-    public var sectionClipShape: AnyShapeBackport {
-        return _sectionClipShape
-    }
     
     public var rowContentInsets: ScrollViewSectionPaddingType {
         return _rowContentInsets
@@ -93,6 +91,10 @@ public struct AnyScrollViewSectionStyle: ScrollViewSectionStyle {
     
     public func makeHeaderBody(configuration: HeaderConfiguration) -> some View {
         _makeHeader(configuration)
+    }
+    
+    public func makeRowsBody(configuration: RowsConfiguration) -> some View {
+        _makeRows(configuration)
     }
     
     public func makeRowBody(configuration: RowConfiguration) -> some View {

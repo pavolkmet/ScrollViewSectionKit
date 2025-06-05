@@ -156,41 +156,47 @@ public struct ScrollViewSection<Content, Header, Footer>: View where Content: Vi
                 )
             )
             /// Rows
-            Group {
-                switch scrollViewSectionContainerType {
-                case .VStack:
-                    VStack(alignment: .leading, spacing: 0.0) {
-                        let first = children.first?.id
-                        let last = children.last?.id
-                        ForEach(children) { child in
-                            /// Row
-                            if let menuItems = child[ScrollViewRowContextMenuViewTraitKey.self] {
-                                row(child: child, first: first, last: last)
-                                    .contextMenu(menuItems: menuItems)
-                            } else {
-                                row(child: child, first: first, last: last)
+            let rows = {
+                Group {
+                    switch scrollViewSectionContainerType {
+                    case .VStack:
+                        VStack(alignment: .leading, spacing: 0.0) {
+                            let first = children.first?.id
+                            let last = children.last?.id
+                            ForEach(children) { child in
+                                /// Row
+                                if let menuItems = child[ScrollViewRowContextMenuViewTraitKey.self] {
+                                    row(child: child, first: first, last: last)
+                                        .contextMenu(menuItems: menuItems)
+                                } else {
+                                    row(child: child, first: first, last: last)
+                                }
                             }
                         }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                case .LazyVStack:
-                    LazyVStack(alignment: .leading, spacing: 0.0) {
-                        let first = children.first?.id
-                        let last = children.last?.id
-                        ForEach(children) { child in
-                            /// Row
-                            if let menuItems = child[ScrollViewRowContextMenuViewTraitKey.self] {
-                                row(child: child, first: first, last: last)
-                                    .contextMenu(menuItems: menuItems)
-                            } else {
-                                row(child: child, first: first, last: last)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    case .LazyVStack:
+                        LazyVStack(alignment: .leading, spacing: 0.0) {
+                            let first = children.first?.id
+                            let last = children.last?.id
+                            ForEach(children) { child in
+                                /// Row
+                                if let menuItems = child[ScrollViewRowContextMenuViewTraitKey.self] {
+                                    row(child: child, first: first, last: last)
+                                        .contextMenu(menuItems: menuItems)
+                                } else {
+                                    row(child: child, first: first, last: last)
+                                }
                             }
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
-            .clipShape(scrollViewSectionStyle.sectionClipShape)
+            scrollViewSectionStyle.makeRowsBody(
+                configuration: .init(
+                    label: .init(content: rows())
+                )
+            )
             /// Footer
             scrollViewSectionStyle.makeFooterBody(
                 configuration: .init(

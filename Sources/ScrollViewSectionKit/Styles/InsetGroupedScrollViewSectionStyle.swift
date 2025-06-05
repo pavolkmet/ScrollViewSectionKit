@@ -33,10 +33,6 @@ public struct InsetGroupedScrollViewSectionStyle: ScrollViewSectionStyle {
     
     // MARK: - IScrollViewSectionStyle
     
-    public var sectionClipShape: AnyShapeBackport {
-        return AnyShapeBackport(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
-    }
-    
     public var rowContentInsets: ScrollViewSectionPaddingType {
         return .edges(.horizontal, 20.0)
     }
@@ -72,6 +68,12 @@ public struct InsetGroupedScrollViewSectionStyle: ScrollViewSectionStyle {
             .padding(.top, 10.0)
             .padding(.bottom, 8.0)
             .padding(.horizontal, 20.0)
+    }
+    
+    @ViewBuilder
+    public func makeRowsBody(configuration: RowsConfiguration) -> some View {
+        configuration.label
+            .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
     }
     
     @ViewBuilder

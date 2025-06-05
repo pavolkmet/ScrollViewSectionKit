@@ -33,10 +33,6 @@ public struct PlainScrollViewSectionStyle: ScrollViewSectionStyle {
     
     // MARK: - IScrollViewSectionStyle
     
-    public var sectionClipShape: AnyShapeBackport {
-        return AnyShapeBackport(Rectangle())
-    }
-    
     public var rowContentInsets: ScrollViewSectionPaddingType {
         return .edges(.horizontal, 20.0)
     }
@@ -72,6 +68,11 @@ public struct PlainScrollViewSectionStyle: ScrollViewSectionStyle {
             .padding(.top, 10.0)
             .padding(.bottom, 8.0)
             .padding(.horizontal, 20.0)
+    }
+    
+    public func makeRowsBody(configuration: RowsConfiguration) -> some View {
+        configuration.label
+            .clipShape(Rectangle())
     }
     
     @ViewBuilder
