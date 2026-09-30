@@ -95,6 +95,10 @@ public protocol ScrollViewSectionStyle {
     
     @ViewBuilder
     /// Creates the view for the section row.
+    ///
+    /// The row's height is up to the style: `ScrollViewSection` gives rows no minimum height. The built-in styles keep
+    /// rows at least 44pt tall with `.frame(minHeight: 44.0, alignment: .leading)`; a custom style that wants the same
+    /// applies it here, and one that leaves it out lets each row size to its content.
     /// - Parameter configuration: The configuration object used to access data about the section.
     /// - Returns: The view for the section row.
     func makeRowBody(configuration: Self.RowConfiguration) -> Self.RowBody

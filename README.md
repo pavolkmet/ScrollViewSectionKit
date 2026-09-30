@@ -356,6 +356,83 @@ It should look like this ⬇️
     <img src="Resources/Example 4.png" width="320">
 </p>
 
+### Row - Minimum Height
+
+The minimum height of a row is part of the section style. `ScrollViewSection` gives rows no minimum height of its own, so each style decides it in `makeRowBody(configuration:)`. The built-in `.plain`, `.grouped` and `.insetGrouped` styles keep every row at least 44pt tall, the minimum tap target on iOS.
+
+In the following example the `CompactScrollViewSectionStyle` leaves the minimum out, so every row is exactly as tall as its content and its own padding. A custom style that wants the same 44pt rows as the built-in styles applies `.frame(minHeight: 44.0, alignment: .leading)` in `makeRowBody(configuration:)` instead.
+
+```swift
+import ScrollViewSectionKit
+
+struct CompactScrollViewSectionStyle: ScrollViewSectionStyle {
+    
+    var rowContentInsets: ScrollViewSectionPaddingType {
+        return .edges(.horizontal, 20.0)
+    }
+    
+    var rowBackgroundColor: Color? {
+        return Color(uiColor: UIColor.secondarySystemGroupedBackground)
+    }
+    
+    var rowSeparatorInsets: ScrollViewSectionPaddingType {
+        return .edges(.leading, 20.0)
+    }
+    
+    var rowSeparatorColor: Color? {
+        return nil
+    }
+    
+    func makeContentBody(configuration: ContentConfiguration) -> some View {
+        configuration.label
+            .padding(.horizontal, 20.0)
+    }
+    
+    func makeHeaderBody(configuration: HeaderConfiguration) -> some View {
+        configuration.label
+    }
+    
+    func makeRowsBody(configuration: RowsConfiguration) -> some View {
+        configuration.label
+            .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
+    }
+    
+    func makeRowBody(configuration: RowConfiguration) -> some View {
+        /// No minimum height, each row is as tall as its content
+        configuration.label
+    }
+    
+    func makeFooterBody(configuration: FooterConfiguration) -> some View {
+        configuration.label
+    }
+    
+}
+
+struct ContentView: View {
+    
+    var body: some View {
+        ScrollView {
+            ScrollViewSection {
+                Text("This is a 1st row.")
+                    .padding(.vertical, 8.0)
+                Text("This is a 2nd row.")
+                    .padding(.vertical, 8.0)
+            }
+            .scrollViewSectionStyle(CompactScrollViewSectionStyle())
+        }
+        .scrollViewSectionBackgroundColor(.clear)
+        .background {
+            Color(uiColor: UIColor.systemGroupedBackground)
+                .ignoresSafeArea()
+        }
+    }
+    
+}
+```
+
+> [!IMPORTANT]
+> Before version 1.7.0 `ScrollViewSection` itself kept every row at least 44pt tall, whatever the style. A custom style written for an earlier version keeps its 44pt rows by adding `.frame(minHeight: 44.0, alignment: .leading)` to its `makeRowBody(configuration:)`.
+
 ### Row - Separator Insets
 
 In the previous example we adjusted the row insets but the separators still use the default insets. We can change this by using `scrollViewRowSeparatorInsets(_ insets: EdgeInsets?)` modifier. This modifier can be used per section or per row.
