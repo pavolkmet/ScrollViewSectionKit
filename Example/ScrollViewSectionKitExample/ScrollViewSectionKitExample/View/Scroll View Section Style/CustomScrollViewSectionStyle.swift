@@ -79,6 +79,7 @@ struct CustomScrollViewSectionStyle: ScrollViewSectionStyle {
     @ViewBuilder
     func makeRowBody(configuration: RowConfiguration) -> some View {
         configuration.label
+            .frame(minHeight: 44.0, alignment: .leading)
     }
     
     @ViewBuilder

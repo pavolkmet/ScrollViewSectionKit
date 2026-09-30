@@ -131,7 +131,7 @@ public struct ScrollViewSection<Content, Header, Footer>: View where Content: Vi
         /// Content
         ExtractMulti(
             content()
-                .frame(maxWidth: .infinity, minHeight: 44.0, alignment: .leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
         ) { children in
             if children.count > 0 {
                 scrollViewSectionStyle.makeContentBody(configuration: .init(
